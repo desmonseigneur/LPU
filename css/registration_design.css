@@ -1,0 +1,31 @@
+.a-forms {
+	padding: 40px;
+	padding-top: 30px;
+	padding-bottom: 50px;
+	background: #fff;
+}
+
+.a.form input[type=text] {
+	text-transform: capitalize;
+}
+
+.form-group.required .control-label:after {
+	color: #d00;
+	content: '•';
+	position: absolute;
+	margin-left: 2px;
+	top: -5px;
+}
+
+form .a-fields-group {
+	padding: 20px;
+	margin-bottom: 20px;
+	background: #f2f2f2;
+}
+
+.page_border {
+	width: 100%;
+	float: left;
+	box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+
+}

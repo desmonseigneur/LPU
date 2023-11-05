@@ -1,0 +1,203 @@
+#productForm 
+{
+    width: 300px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f8f8f8;
+}
+
+#productForm label 
+{
+    display: block;
+    margin-bottom: 10px;
+}
+
+#productForm select 
+{
+    width: 100%;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.title 
+{
+    text-align: center !important;
+}
+
+.container 
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.form-group 
+{
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label 
+{
+    display: flex;
+    margin-right: 70px;
+    justify-content: flex-start;
+    align-items: center;
+    font-weight: bold;
+    font-size: 25px;
+}
+
+.form-group input {
+    margin-left: auto; /* Pushes the input to the right */
+}
+
+.container input[type="text"], 
+.container select 
+{
+    width: 40%;
+    padding: 1px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.container input[type="text"]:read-only 
+{
+    background-color: #eee;
+}
+
+.container input[type="radio"] 
+{
+    margin-left: 2px;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between; /* Adjusts the space between the buttons */
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+#buy-button 
+{
+    display: block;
+    width: 20%;
+    padding: 10px;
+    background-color: #e32727;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+#buy-button:hover 
+{
+    background-color: #9d1f1f;
+}
+
+#calculate-button 
+{
+    display: block;
+    width: 30%;
+    padding: 10px;
+    background-color: #007BFF;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+#calculate-button:hover 
+{
+    background-color: #0056b3;
+}
+
+#save-button 
+{
+    display: block;
+    width: 30%;
+    padding: 10px;
+    background-color: #2fff00;
+    color: rgb(0, 0, 0);
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+#save-button:hover 
+{
+    background-color: #25b904;
+}
+
+#update-button 
+{
+    display: block;
+    width: 30%;
+    padding: 10px;
+    background-color: #ffea00;
+    color: rgb(0, 0, 0);
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+#update-button:hover 
+{
+    background-color: #c2b201;
+}
+/* Calculator Container */
+.calculator {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Adjusted to 4 columns */
+    gap: 20px;
+    max-width: 350px; /* Adjusted max-width */
+    margin: auto;
+    padding: 20px; /* Adjusted padding */
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
+}
+
+/* Calculator Buttons */
+.calculator button {
+    width: 70px;
+    height: 70px;
+    border: 2px solid #000;
+    border-radius: 5px;
+    font-size: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Calculator Button Hover Effect */
+.calculator button:hover {
+    background-color: #ccc;
+}
+
+
+/* Numpad Grid */
+.numpad {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    margin-right: 25px;
+    gap: 10px;
+    grid-column: span 4;
+    grid-row: span 4;
+}
+
+/* Equals Button Container */
+.equals-button-container {
+    grid-column: span 4;
+    margin-right: 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5px;
+}
+

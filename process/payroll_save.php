@@ -4,6 +4,9 @@ try {
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         $employee_number = $_POST['employee_no'];
+        $firstname = $_POST['firstname'];
+        $mname = $_POST['mname'];
+        $surname = $_POST['surname'];
         $basic_rate_hour = $_POST['basic_rate_hour'];
         $basic_num_hours_cutoff = $_POST['basic_num_hours_cutoff'];
         $basic_income_cutoff = $_POST['basic_income_cutoff'];

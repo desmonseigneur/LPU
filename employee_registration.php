@@ -51,8 +51,7 @@
             <div class="container">
                 <div class="page_border">
                     <form id="pic-upload" class="a-form" enctype="multipart/form-data" method="post" width='840'>
-                        <h1 style="text-align:center;  font-size:47px; color:black"><b>Earl's Employee Personal
-                                Information</b></h1>
+                        <h1 style="text-align:center;  font-size:47px; color:black"><b>Aling Alaine's Employee's Information</b></h1>
                         <div class="a-form-group mt-3" style="float:left; clear:block; width:20%;">
                             <div id="pic-box" style='width:170px; height:150px; overflow:hidden; margin-top:55px; margin-left:5px; background:none; border:thin solid #d3d3d3'></div>
                             <input type="file" style="margin-top:10px; text-align:center;" id="uploadfile" name="uploadfile" value="" />

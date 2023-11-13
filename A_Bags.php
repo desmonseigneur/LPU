@@ -201,7 +201,7 @@
 						<div class="col-6">
 							<!-- radio -->
 							<div>
-								<ul class="list-group list-group-horizontal gap-5">
+								<ul class="list-group list-group-horizontal gap-5" id="discount_option">
 									<li class="" style="list-style-type: none;">
 										<input class="form-check-input" type="radio" name="flexRadioDefault" id="senior" value='Senior Citizen' onclick="handleDiscounts(0.30)">
 										<label class="form-check-label" for="flexRadioDefault1">

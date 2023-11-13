@@ -1,15 +1,15 @@
 <?php
 	include "process/db_connection.php";
 	$conn = OpenCon();
-	$sql = "SELECT * FROM `incometbl`;";
+	$sql = "SELECT * FROM `incometbl` JOIN deductiontbl ON incometbl.employee_no = deductiontbl.employee_no JOIN personal_infotbl ON deductiontbl.employee_no = incometbl.employee_no;";
 	$result = $conn->query($sql);
 	
 	if ($_SERVER["REQUEST_METHOD"] == "POST") {
-	    $item_name = $_POST["search"];
-	    $sql = "SELECT * FROM `incometbl` WHERE employee_no = '$item_name' OR id = '$item_name';";
+	    $employee_no = $_POST["search"];
+	    $sql = "SELECT * FROM `incometbl` WHERE employee_no = '$employee_no' OR id = '$employee_no';";
 	    $result = $conn->query($sql);
 	    if (!$item_name) {
-	        $sql = "SELECT * FROM `incometbl`;";
+	        $sql = "SELECT * FROM `incometbl` JOIN deductiontbl ON incometbl.employee_no = deductiontbl.employee_no JOIN personal_infotbl ON deductiontbl.employee_no = incometbl.employee_no;";
 	        $result = $conn->query($sql);
 	    }
 	}
@@ -29,7 +29,7 @@
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 		<link rel="stylesheet" href="css/sidebar_design.css">
 		<script src="js/script.js"></script>
-		<title>Bags Section</title>
+		<title>Payroll Report</title>
 	</head>
 	<body>
 		<div id="wrapper">
@@ -62,7 +62,7 @@
 		<!-- main content -->
 		<div class=" flex-grow-1 bg-white">
 			<div class="px-5 bg-white">
-				<h1 class="d-flex justify-content-center m-2" style="font-size:30px;">Payroll Report</h1>
+				<h1 class="d-flex justify-content-center m-2" style="font-size:30px;"><b>Payroll Report</b></h1>
 				<form action="" method="post" class="input-group mb-3 mt-3" style="height: 2rem; width:250px">
 					<input type="text" class="form-control" aria-describedby="button-addon2" placeholder="Search item name" name='search'>
 					<button class="btn btn-outline-secondary" type="submit" id="search_button">
@@ -74,20 +74,15 @@
 				<table class="table table-hover">
 					<thead>
 						<tr>
-							<th scope="col">id</th>
-							<th scope="col">employee_no</th>
-							<th scope="col">income_date</th>
-							<th scope="col">basic_rate_hour</th>
-							<th scope="col">basic_num_hrs</th>
-							<th scope="col">basic_income</th>
-							<th scope="col">hono_rate_hour</th>
-							<th scope="col">hono_num_hrs</th>
-							<th scope="col">hono_income</th>
-							<th scope="col">other_rate_hour</th>
-							<th scope="col">other_num_hrs</th>
-							<th scope="col">other_income</th>
-							<th scope="col">gross_income</th>
-							<th scope="col">net_income</th>
+							<th scope="col">Employee Number</th>
+							<th scope="col">Employee Name</th>
+							<th scope="col">Basic Income</th>
+							<th scope="col">Honorarium Income</th>
+							<th scope="col">Other Income</th>
+							<th scope="col">Gross Income</th>
+							<th scope="col">Total Deduction</th>
+							<th scope="col">Net Income</th>
+							<th scope="col">Pay Date</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -95,20 +90,15 @@
 							while ($item = $result->fetch_assoc()) {
 							    echo "
 							    <tr>
-							        <th scope='row'>$item[id]</th>
 							        <td>$item[employee_no]</td>
-							        <td>$item[income_date]</td>
-							        <td>$item[basic_rate_hour]</td>
-							        <td>$item[basic_num_hrs]</td>
+									<td>$item[fname] $item[mname] $item[lname]</td>
 							        <td>$item[basic_income]</td>
-							        <td>$item[hono_rate_hour]</td>
-							        <td>$item[hono_num_hrs]</td>
 							        <td>$item[hono_income]</td>
-							        <td>$item[other_rate_hour]</td>
-							        <td>$item[other_num_hrs]</td>
 							        <td>$item[other_income]</td>
 							        <td>$item[gross_income]</td>
+									<td>$item[total_deduction]</td>
 							        <td>$item[net_income]</td>
+									<td>$item[income_date]</td>
 							    </tr>
 							    ";
 							}

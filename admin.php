@@ -13,7 +13,7 @@
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 		<link rel="stylesheet" href="css/sidebar_design.css">
 		<script src="js/script.js"></script>
-		<title>Bags Section</title>
+		<title>Home</title>
 	</head>
 	<body>
 		<div id="wrapper">

@@ -39,7 +39,7 @@ a:active:hover {
 #login-form-wrap {
 	background-color: #fff;
 	width: 35%;
-	margin: 30px auto;
+	margin: 175px auto;
 	text-align: center;
 	padding: 20px 0 0 0;
 	border-radius: 4px;
@@ -47,7 +47,7 @@ a:active:hover {
 }
 
 #login-form {
-	padding: 0 60px;
+	padding: 10px 60px;
 }
 
 input {
@@ -64,7 +64,7 @@ input[type="text"],
 input[type="password"] {
 	width: 100%;
 	padding: 0 0 0 10px;
-	margin: 0;
+	margin-bottom: 12px;
 	color: #8a8b8e;
 	border: 1px solid #c2c0ca;
 	font-style: normal;
@@ -77,32 +77,27 @@ input[type="password"] {
 	background: none;
 }
 
-input[type="text"]:focus,
-input[type="email"]:focus {
+input[type="text"]:focus{
 	border-color: #3ca9e2;
 }
 
-input[type="text"]:focus:invalid,
-input[type="email"]:focus:invalid {
+input[type="text"]:focus:invalid {
 	color: #cc1e2b;
 	border-color: #cc1e2b;
 }
 
-input[type="text"]:valid~.validation,
-input[type="email"]:valid~.validation {
+input[type="text"]:valid~.validation {
 	display: block;
 	border-color: #0C0;
 }
 
-input[type="text"]:valid~.validation span,
-input[type="email"]:valid~.validation span {
+input[type="text"]:valid~.validation span{
 	background: #0C0;
 	position: absolute;
 	border-radius: 6px;
 }
 
-input[type="text"]:valid~.validation span:first-child,
-input[type="email"]:valid~.validation span:first-child {
+input[type="text"]:valid~.validation span:first-child {
 	top: 30px;
 	left: 14px;
 	width: 20px;
@@ -111,8 +106,7 @@ input[type="email"]:valid~.validation span:first-child {
 	transform: rotate(-45deg);
 }
 
-input[type="text"]:valid~.validation span:last-child,
-input[type="email"]:valid~.validation span:last-child {
+input[type="text"]:valid~.validation span:last-child{
 	top: 35px;
 	left: 8px;
 	width: 11px;
@@ -131,8 +125,9 @@ input[type="email"]:valid~.validation span:last-child {
 	top: 0px;
 }
 
-input[type="submit"] {
-	border: none;
+button[type="submit"] {
+	margin-top: 5px;
+	border-radius: 6px;
 	display: block;
 	background-color: #3ca9e2;
 	color: #fff;
@@ -142,23 +137,16 @@ input[type="submit"] {
 	-webkit-transition: all 0.2s ease;
 	transition: all 0.2s ease;
 	font-size: 18px;
+	width: 200px;
+	padding: 20px;
 	position: relative;
 	display: inline-block;
 	cursor: pointer;
 	text-align: center;
 }
 
-input[type="submit"]:hover {
+button[type="submit"]:hover {
 	background-color: #329dd5;
 	-webkit-transition: all 0.2s ease;
 	transition: all 0.2s ease;
-}
-
-#create-account-wrap {
-	background-color: #eeedf1;
-	color: #8a8b8e;
-	font-size: 14px;
-	width: 100%;
-	padding: 10px 0;
-	border-radius: 0 0 4px 4px;
 }

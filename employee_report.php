@@ -1,5 +1,7 @@
 <?php
 include 'process/db_connection.php';
+include 'process/session_check.php';
+
 $conn = OpenCon();
 $sql = "SELECT * FROM `personal_infotbl`;";
 $result = $conn->query($sql);
@@ -39,18 +41,21 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 				<ul class="nav sidebar-nav">
 					<div class="sidebar-header">
 						<div class="sidebar-brand">
-							<a href="admin.php">Tindahan</a>
+                        <a href="admin.php" class="<?php echo $user_privilege == 1 ? '' : 'd-none' ?>">Tindahan</a>
+                            <a href="#" class="<?php echo $user_privilege == 2 ? '' : 'd-none' ?>">Tindahan</a>
+                            <a href="#" class="<?php echo $user_privilege == 3 ? '' : 'd-none' ?>">Tindahan</a>
 						</div>
 					</div>
-					<li><a href="admin.php">Home</a></li>
-					<li><a href="employee_registration.php">Employee Registration</a></li>
-					<li><a href="employee_report.php">Employee Report</a></li>
-					<li><a href="payroll.php">Payroll</a></li>
-					<li><a href="payroll_report.php">Payroll Report </a></li>
-					<li><a href="A_Kitchen.php">POS</a></li>
-					<li><a href="A_report.php">POS Report</a></li>
-					<li><a href="user_account_info.php">User Account</a></li>
-					<li><a href="login.php">Log Out</a></li>
+					<li><a href="admin.php" class="<?php echo $user_privilege == 1 ? '' : 'd-none' ?>">Home</a></li>
+					<li><a href="employee_registration.php" class="<?php echo $user_privilege == 1 ? '' : 'd-none' ?>">Employee Registration</a></li>
+					<li><a href="employee_report.php" class="<?php echo $user_privilege == 1 ? '' : 'd-none' ?>">Employee Report</a></li>
+					<li><a href="payroll.php" class="<?php echo ($user_privilege == 1 || $user_privilege == 3) ? '' : 'd-none' ?>">Payroll</a></li>
+					<li><a href="payroll_report.php" class="<?php echo ($user_privilege == 1 || $user_privilege == 3) ? '' : 'd-none' ?>">Payroll Report </a></li>
+					<li><a href="A_Kitchen.php"class="<?php echo ($user_privilege == 1 || $user_privilege == 2) ? '' : 'd-none' ?>">POS</a></li>
+					<li><a href="A_report.php"class="<?php echo ($user_privilege == 1 || $user_privilege == 2) ? '' : 'd-none' ?>">POS Report</a></li>
+					<li><a href="user_account_info.php" class="<?php echo $user_privilege == 1 ? '' : 'd-none' ?>">User Account</a></li>
+					<li><a href="user_account_report.php" class="<?php echo $user_privilege == 1 ? '' : 'd-none' ?>">Account Report</a></li>
+					<li><a href="index.php">Log Out</a></li>
 				</ul>
 			</nav>
 			<div id="page-content-wrapper">
@@ -64,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         <!-- main content -->
         <div class="flex-grow-1 bg-white">
             <div class="px-5 bg-white">
-                <h1 class="d-flex justify-content-center m-2" style="font-size:30px;">Payroll Report</h1>
+                <h1 class="d-flex justify-content-center m-2" style="font-size:30px;">Employee Report</h1>
 
                 <form action="" method="post" class="input-group mb-3 mt-3" style="height: 2rem; width:250px">
                     <input type="text" class="form-control" aria-describedby="button-addon2" placeholder="Search item name" name='search'>
@@ -90,7 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                         if ($result) {
                             while ($item = $result->fetch_assoc()) {
                                 echo "
-                                <tr>
+                                <tr class='clickable-row' style='cursor: pointer' data-href='employee_registration.php?id={$item['id']}'>
                                     <td>$item[employee_no]</td>
                                     <td>$item[fname] $item[mname] $item[lname]</td>
                                     <td>$item[birth_date]</td>
@@ -110,7 +115,13 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             </div>
         </div>
     </div>
-
 </body>
+<script>
+$(document).ready(function() {
+        $(".clickable-row").click(function() {
+            window.location = $(this).data("href")
+        })
+    })
+</script>
 
 </html>

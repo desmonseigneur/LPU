@@ -43,7 +43,6 @@ try {
         // save employee record to database
         $sql1 = "INSERT INTO incometbl(income_date, basic_rate_hour, basic_income, hono_rate_hour, hono_num_hrs, hono_income, other_rate_hour, other_num_hrs, other_income, gross_income, net_income, employee_no, basic_num_hrs) 
                 VALUES('$pay_date', '$basic_rate_hour', '$basic_income_cutoff', '$hono_rate_hour', '$hono_num_hours_cutoff', '$hono_income_cutoff', '$other_rate_hour', '$other_num_hours_cutoff', '$other_income_cutoff', '$gross_income', '$net_income', '$employee_number', '$basic_num_hours_cutoff')";
-
         $conn->query($sql1);
 
         $sql2 = "INSERT INTO deductiontbl (employee_no, deduction_date, sss_contri, philHealth_contri, pagibig_contri, income_tax_contri, sss_loan, pagibig_loan, faculty_savings_deposit, faculty_savings_loan, salary_loan, other_loans, total_deduction) 

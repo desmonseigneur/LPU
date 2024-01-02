@@ -1,15 +1,24 @@
+<?php
+include 'process/user_account_functions.php';
+include 'process/session_check.php';
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<!-- Latest compiled and minified CSS -->
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-		<!-- Bootstrap CSS -->
-		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-		<link rel="stylesheet" href="css/user_design.css">
+		<!-- Latest jQuery -->
+		<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+		<!-- Latest Popper.js -->
+		<script src="https://cdn.jsdelivr.net/npm/popper.js@2.11.6/dist/umd/popper.min.js"></script>
+		<!-- Latest Bootstrap JS -->
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+		<!-- Latest Bootstrap CSS -->
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 		<link rel="stylesheet" href="css/sidebar_design.css">
-		<title>User Account Information</title>
+		<title>User Account</title>
 	</head>
 	<body>
 		<div id="wrapper">
@@ -17,18 +26,21 @@
 				<ul class="nav sidebar-nav">
 					<div class="sidebar-header">
 						<div class="sidebar-brand">
-							<a href="admin.php">Tindahan</a>
+                        <a href="admin.php" class="<?php echo $user_privilege == 1 ? '' : 'd-none' ?>">Tindahan</a>
+                            <a href="#" class="<?php echo $user_privilege == 2 ? '' : 'd-none' ?>">Tindahan</a>
+                            <a href="#" class="<?php echo $user_privilege == 3 ? '' : 'd-none' ?>">Tindahan</a>
 						</div>
 					</div>
-					<li><a href="admin.php">Home</a></li>
-					<li><a href="employee_registration.php">Employee Registration</a></li>
-					<li><a href="employee_report.php">Employee Report</a></li>
-					<li><a href="payroll.php">Payroll</a></li>
-					<li><a href="payroll_report.php">Payroll Report </a></li>
-					<li><a href="A_Kitchen.php">POS</a></li>
-					<li><a href="A_report.php">POS Report</a></li>
-					<li><a href="user_account_info.php">User Account</a></li>
-					<li><a href="login.php">Log Out</a></li>
+					<li><a href="admin.php" class="<?php echo $user_privilege == 1 ? '' : 'd-none' ?>">Home</a></li>
+					<li><a href="employee_registration.php" class="<?php echo $user_privilege == 1 ? '' : 'd-none' ?>">Employee Registration</a></li>
+					<li><a href="employee_report.php" class="<?php echo $user_privilege == 1 ? '' : 'd-none' ?>">Employee Report</a></li>
+					<li><a href="payroll.php" class="<?php echo ($user_privilege == 1 || $user_privilege == 3) ? '' : 'd-none' ?>">Payroll</a></li>
+					<li><a href="payroll_report.php" class="<?php echo ($user_privilege == 1 || $user_privilege == 3) ? '' : 'd-none' ?>">Payroll Report </a></li>
+					<li><a href="A_Kitchen.php"class="<?php echo ($user_privilege == 1 || $user_privilege == 2) ? '' : 'd-none' ?>">POS</a></li>
+					<li><a href="A_report.php"class="<?php echo ($user_privilege == 1 || $user_privilege == 2) ? '' : 'd-none' ?>">POS Report</a></li>
+					<li><a href="user_account_info.php" class="<?php echo $user_privilege == 1 ? '' : 'd-none' ?>">User Account</a></li>
+					<li><a href="user_account_report.php" class="<?php echo $user_privilege == 1 ? '' : 'd-none' ?>">Account Report</a></li>
+					<li><a href="index.php">Log Out</a></li>
 				</ul>
 			</nav>
 			<div id="page-content-wrapper">
@@ -39,82 +51,87 @@
 				</button>
 			</div>
 		</div>
-		<div class="container">
-			<div class="page_border">
-				<form id="pic-upload" class="a-form" enctype="multipart/form-data"method="post" width='840'>
-					<h1><b>User Account Information</b></h1>
-					<div class="a-form-group mt-3" style="float:left; clear:block; width:20%;" >
-						<div id="pic-box" style='width:170px; height:150px; overflow:hidden; margin-top:7px; margin-left:35px; background:none; border:thin solid #d3d3d3'>
-							<img src="uploads/Picture.png" alt="Picture" style="width: 100%; height:auto;">
-						</div>
-					</div>
-				</form>
-				<form id="form_employee_registration_save" class="a-form" action=""method="post" width='840'>
-					<div class="a-form-group mt-3" width='480'>
-						<div class="a-fields-group mt-0">
-							<div class="form-row">
-								<div class="form-group col">
-									<label for="fname" class="mb-0 control-label">First Name</label>
-									<input type="text" class="form-control mt-0"name="fname" id="fname" value="" readonly>
-								</div>
-								<div class="form-group col-3">
-									<label for="mname" class="mb-0">Middle Name</label>
-									<input type="text" class="form-control mt-0"name="mname" id="mname" readonly>
-								</div>
-								<div class="form-group col">
-									<label for="lname" class="mb-0 control-label">Last Name</label>
-									<input type="text" class="form-control mt-0"name="lname" id="lname" value="" readonly>
-								</div>
-								<div class="form-group col-2">
-									<label for="suffix" class="mb-0">Suffix</label>
-									<input type="text" class="form-control mt-0"name="suffix" id="suffix" readonly>
-								</div>
-								<div class="form-group col-2">
-									<label for="suffix" class="mb-0">Department</label>
-									<input type="text" class="form-control mt-0"name="suffix" id="suffix" readonly>
-								</div>
-							</div>
-							<div class="form-row">
-								<div class="form-group col">
-									<label for="fname" class="mb-0 control-label">Designation</label>
-									<input type="text" class="form-control mt-0"name="fname" id="fname" value="" readonly>
-								</div>
-								<div class="form-group col-3">
-									<label for="mname" class="mb-0">Username</label>
-									<input type="text" class="form-control mt-0"name="mname" id="mname">
-								</div>
-								<div class="form-group col">
-									<label for="lname" class="mb-0 control-label">Password</label>
-									<input type="text" class="form-control mt-0"name="lname" id="lname" value="">
-								</div>
-							</div>
-							<br>
-							<div class="form-row">
-								<div class="form-group col">
-									<label for="fname" class="mb-0 control-label">Confirm Password</label>
-									<input type="text" class="form-control mt-0"name="fname" id="fname" value="">
-								</div>
-								<div class="form-group col-3">
-									<label for="mname" class="mb-0">User Type</label>
-									<input type="text" class="form-control mt-0"name="mname" id="mname">
-								</div>
-								<div class="form-group col">
-									<label for="lname" class="mb-0 control-label">User Status</label>
-									<input type="text" class="form-control mt-0"name="lname" id="lname" value="">
-								</div>
-								<div class="form-group col-2">
-									<label for="suffix" class="mb-0">Employee Number</label>
-									<input type="text" class="form-control mt-0"name="suffix" id="suffix">
-								</div>
-							</div>
-							<button id= "update" type="update">Update</button>
-							<button id= "delete" type="delete">Delete</button>
-							<button id= "cancel" type="cancel">Cancel</button>
-						</div>
-					</div>
-				</form>
-			</div>
-		</div>
+		<div class="flex-grow-4">
+            <div class="container d-flex my-3">
+            <div class="rounded bg-white overflow-hidden">
+                    <form class="row my-2 py-4" method="post">
+                        <div class="col-md-2 border-right">
+                        </div>
+                        <div class="col-md-3">
+                            <div style="padding: 0 0;">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <h4 class="text-right fw-bold">User Account Info</h4>
+                                </div>
+                                <div class="col-md-8"><label class="labels">Username</label>
+                                    <input type="text" class="form-control formdata" placeholder="Username" name='username' id='username' value=<?php echo $username; ?>>
+                                </div> <br>
+                                <div class="col-md-8"><label class="labels">Password</label>
+                                    <input type="password" class="form-control formdata" placeholder="Password" name='password' id='password' value=<?php echo $password; ?>>
+                                </div><br>
+                                <div class="col-md-8"><label class="labels">Confirm Password</label>
+                                    <input type="password" class="form-control formdata mb-2" placeholder="Confirm password" name='confirm_password' id='confirm_password' value=<?php echo $confirm_password; ?>>
+                                    <span id='message'></span>
+                                </div>
+                                <div class="col-md-8 mb-2"><label class="labels">Privilege</label>
+                                    <select class="form-control formdata form-select" name="Privilege" id="Privilege">
+                                        <option value=''>Select Privilege</option>
+                                        <option value="Administrator">1 Admin</option>
+                                        <option value="Cashier">2 Cashier</option>
+                                        <option value="Accounting">3 Accountant</option>
+                                    </select>
+                                </div>
+                                <div class="mt-5">
+                                    <button type="button" class="btn btn-primary" id='update' name='update'>Update</button>
+                                    <button type="reset" class="btn btn-warning" id='delete' name='delete'>Delete</button>
+                                    <button type="button" class="btn btn-light" id='cancel' name='cancel'>Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-5 border-right">
+                        <div style="padding: 0 20px;">
+
+                                <div class="d-flex justify-content-between align-items-center experience">
+                                <h4 class="text-right fw-bold">Information</h4>
+                                </div><br>
+
+                                <div class="row mt-2">
+                                    <div class="col-md-4"><label class="labels">Name</label>
+                                        <input type="text" class="form-control" placeholder="" disabled name='fname' id='fname' value=<?php echo $fname; ?>>
+                                    </div>
+                                    <div class="col-md-4"><label class="labels">Middle Name</label>
+                                        <input type="text" class="form-control" placeholder="" disabled name='mname' id='mname' value=<?php echo $mname; ?>>
+                                    </div>
+                                    <div class="col-md-4"><label class="labels">Surname</label>
+                                        <input type="text" class="form-control" placeholder="" disabled name='lname' id='lname' value=<?php echo $lname; ?>>
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-md-12 mb-2"><label class="labels">Suffix</label>
+                                        <input type="text" class="form-control" placeholder="" name='suffix' id='suffix' disabled value=<?php echo $suffix; ?>>
+                                    </div>
+                                    <div class="col-md-12 mb-2"><label class="labels">Department</label>
+                                        <input type="text" class="form-control" placeholder="" name='department' id='department' disabled value=<?php echo $department; ?>>
+                                    </div>
+                                    <div class="col-md-12 mb-2"><label class="labels">Employee Number</label>
+                                        <input type="text" class="form-control formdata" placeholder="" name='employee_no' id='employee_no' disabled value=<?php echo $employee_no; ?>>
+                                    </div>
+                                    <div class="col-md-12 mb-2"><label class="labels">Employee Status</label>
+                                        <input type="text" class="form-control" placeholder="" name='employee_status' id='employee_status' disabled value=<?php echo $employee_status; ?>>
+                                    </div>
+
+                                    <div class="col-md-12 mb-2"><label class="labels">Designation</label>
+                                        <input type="text" class="form-control" placeholder="" name='designation' disabled value=<?php echo $designation; ?>>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+    </div>
 		<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>

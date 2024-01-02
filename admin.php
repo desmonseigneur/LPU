@@ -1,3 +1,18 @@
+<?php
+include 'process/db_connection.php';
+include 'process/session_check.php';
+
+$conn = OpenCon();
+$sql = "SELECT * FROM `salestbl` ORDER BY id DESC LIMIT 5;";
+$result = $conn->query($sql);
+
+$sql2 = "SELECT id FROM `personal_infotbl`;";
+$result2 = mysqli_fetch_all($conn->query($sql2));
+
+$sql3 = "SELECT COUNT(privilege) AS privilege_count FROM user_accounttbl WHERE privilege != 0 GROUP BY privilege WITH ROLLUP;";
+$result3 = mysqli_fetch_all($conn->query($sql3));
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -21,18 +36,21 @@
 				<ul class="nav sidebar-nav">
 					<div class="sidebar-header">
 						<div class="sidebar-brand">
-							<a href="admin.php">Tindahan</a>
+						<a href="admin.php" class="<?php echo $user_privilege == 1 ? '' : 'd-none' ?>">Tindahan</a>
+                            <a href="#" class="<?php echo $user_privilege == 2 ? '' : 'd-none' ?>">Tindahan</a>
+                            <a href="#" class="<?php echo $user_privilege == 3 ? '' : 'd-none' ?>">Tindahan</a>
 						</div>
 					</div>
-					<li><a href="admin.php">Home</a></li>
-					<li><a href="employee_registration.php">Employee Registration</a></li>
-					<li><a href="employee_report.php">Employee Report</a></li>
-					<li><a href="payroll.php">Payroll</a></li>
-					<li><a href="payroll_report.php">Payroll Report </a></li>
-					<li><a href="A_Kitchen.php">POS</a></li>
-					<li><a href="A_report.php">POS Report</a></li>
-					<li><a href="user_account_info.php">User Account</a></li>
-					<li><a href="login.php">Log Out</a></li>
+					<li><a href="admin.php" class="<?php echo $user_privilege == 1 ? '' : 'd-none' ?>">Home</a></li>
+					<li><a href="employee_registration.php" class="<?php echo $user_privilege == 1 ? '' : 'd-none' ?>">Employee Registration</a></li>
+					<li><a href="employee_report.php" class="<?php echo $user_privilege == 1 ? '' : 'd-none' ?>">Employee Report</a></li>
+					<li><a href="payroll.php" class="<?php echo ($user_privilege == 1 || $user_privilege == 3) ? '' : 'd-none' ?>">Payroll</a></li>
+					<li><a href="payroll_report.php" class="<?php echo ($user_privilege == 1 || $user_privilege == 3) ? '' : 'd-none' ?>">Payroll Report </a></li>
+					<li><a href="A_Kitchen.php"class="<?php echo ($user_privilege == 1 || $user_privilege == 2) ? '' : 'd-none' ?>">POS</a></li>
+					<li><a href="A_report.php"class="<?php echo ($user_privilege == 1 || $user_privilege == 2) ? '' : 'd-none' ?>">POS Report</a></li>
+					<li><a href="user_account_info.php" class="<?php echo $user_privilege == 1 ? '' : 'd-none' ?>">User Account</a></li>
+					<li><a href="user_account_report.php" class="<?php echo $user_privilege == 1 ? '' : 'd-none' ?>">Account Report</a></li>
+					<li><a href="index.php">Log Out</a></li>
 				</ul>
 			</nav>
 			<div id="page-content-wrapper">

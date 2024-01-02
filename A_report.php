@@ -1,19 +1,24 @@
 <?php
-	include 'process/db_connection.php';
-	$conn = OpenCon();
-	$sql = "SELECT * FROM `salestbl`;";
-	$result = $conn->query($sql);
-	
-	if ($_SERVER['REQUEST_METHOD'] == "POST"){
-	    $item_name = $_POST['search'];
-	    $sql = "SELECT * FROM `salestbl` WHERE item_name = '$item_name' OR id = '$item_name';";
-	    $result = $conn->query($sql);
-	    if(!$item_name){
-	        $sql = "SELECT * FROM `salestbl`;";
-	        $result = $conn->query($sql);
-	    }
-	}
-	?>
+include 'process/db_connection.php';
+
+
+$conn = OpenCon();
+$sql = "SELECT * FROM `salestbl`;";
+
+
+$result = $conn->query($sql);
+
+if ($_SERVER['REQUEST_METHOD'] == "POST") {
+    $item_name = $_POST['search'];
+    $sql = "SELECT * FROM `salestbl` WHERE item_name = '$item_name' OR id = '$item_name';";
+    $result = $conn->query($sql);
+    if (!$item_name) {
+        $sql = "SELECT * FROM `salestbl`;";
+        $result = $conn->query($sql);
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -37,18 +42,21 @@
 				<ul class="nav sidebar-nav">
 					<div class="sidebar-header">
 						<div class="sidebar-brand">
-							<a href="admin.php">Tindahan</a>
+						<a href="admin.php" class="<?php echo $user_privilege == 1 ? '' : 'd-none' ?>">Tindahan</a>
+                            <a href="#" class="<?php echo $user_privilege == 2 ? '' : 'd-none' ?>">Tindahan</a>
+                            <a href="#" class="<?php echo $user_privilege == 3 ? '' : 'd-none' ?>">Tindahan</a>
 						</div>
 					</div>
-					<li><a href="admin.php">Home</a></li>
-					<li><a href="employee_registration.php">Employee Registration</a></li>
-					<li><a href="employee_report.php">Employee Report</a></li>
-					<li><a href="payroll.php">Payroll</a></li>
-					<li><a href="payroll_report.php">Payroll Report </a></li>
-					<li><a href="A_Kitchen.php">POS</a></li>
-					<li><a href="A_report.php">POS Report</a></li>
-					<li><a href="user_account_info.php">User Account</a></li>
-					<li><a href="login.php">Log Out</a></li>
+					<li><a href="admin.php" class="<?php echo $user_privilege == 1 ? '' : 'd-none' ?>">Home</a></li>
+					<li><a href="employee_registration.php" class="<?php echo $user_privilege == 1 ? '' : 'd-none' ?>">Employee Registration</a></li>
+					<li><a href="employee_report.php" class="<?php echo $user_privilege == 1 ? '' : 'd-none' ?>">Employee Report</a></li>
+					<li><a href="payroll.php" class="<?php echo ($user_privilege == 1 || $user_privilege == 3) ? '' : 'd-none' ?>">Payroll</a></li>
+					<li><a href="payroll_report.php" class="<?php echo ($user_privilege == 1 || $user_privilege == 3) ? '' : 'd-none' ?>">Payroll Report </a></li>
+					<li><a href="A_Kitchen.php"class="<?php echo ($user_privilege == 1 || $user_privilege == 2) ? '' : 'd-none' ?>">POS</a></li>
+					<li><a href="A_report.php"class="<?php echo ($user_privilege == 1 || $user_privilege == 2) ? '' : 'd-none' ?>">POS Report</a></li>
+					<li><a href="user_account_info.php" class="<?php echo $user_privilege == 1 ? '' : 'd-none' ?>">User Account</a></li>
+					<li><a href="user_account_report.php" class="<?php echo $user_privilege == 1 ? '' : 'd-none' ?>">Account Report</a></li>
+					<li><a href="index.php">Log Out</a></li>
 				</ul>
 			</nav>
 			<div id="page-content-wrapper">
@@ -90,7 +98,7 @@
 							if ($result) {
 							    while ($item = $result->fetch_assoc()) {
 							        echo "
-							        <tr>
+							        <tr class='clickable-row' style='cursor: pointer' data-href='{$item['item_type']}.php?id={$item['id']}'>
 							            <td>$item[item_name]</td>
 										<td>$item[quantity]</td>
 							            <td>$item[price]</td>
@@ -111,4 +119,11 @@
 		</div>
 		</div>
 	</body>
+	<script>
+    $(document).ready(function() {
+        $(".clickable-row").click(function() {
+            window.location = $(this).data("href")
+        })
+    })
+</script>
 </html>

@@ -18,6 +18,7 @@ include 'process/session_check.php';
 		<!-- Latest Bootstrap CSS -->
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 		<link rel="stylesheet" href="css/sidebar_design.css">
+        <script src="js/user_account_save.js"></script>
 		<title>User Account</title>
 	</head>
 	<body>
@@ -132,13 +133,6 @@ include 'process/session_check.php';
     </div>
     </div>
     </div>
-		<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
-		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-		<script src='https://code.jquery.com/jquery-3.3.1.slim.min.js'></script>
-		<script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js'></script>
-		<script src='https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js'></script>
-		<script src='https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.4/js/tether.min.js'></script>
 		<script  src="js/script.js"></script>
 	</body>
 </html>

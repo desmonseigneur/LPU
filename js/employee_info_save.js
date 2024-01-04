@@ -39,7 +39,7 @@ $(document).ready(function () {
       var fieldValue = $(this).val();
       formData[fieldName] = fieldValue;
     });
-
+    console.log(formData)
     $.ajax({
       type: "POST",
       url: "process/employee_update.php",

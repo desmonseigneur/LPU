@@ -38,7 +38,7 @@ $(document).ready(function () {
     else {
       $.ajax({
         type: "POST",
-        url: "process/useraccount_save.php",
+        url: "process/user_account_save.php",
         data: formData,
         dataType: "json",
         success: function (result) {
@@ -55,7 +55,7 @@ $(document).ready(function () {
     
     $.ajax({
       type: "POST",
-      url: "process/payroll_delete.php",
+      url: "process/earl_payroll_delete.php",
       data: formData,
       dataType: "json",
       success: function (result) {

@@ -1,27 +1,26 @@
 <?php
-include 'process/db_connection.php';
-
-
-$conn = OpenCon();
-$sql = "SELECT * FROM user_accounttbl JOIN personal_infotbl ON user_accounttbl.employee_no = personal_infotbl.employee_no WHERE user_accounttbl.username = '' OR user_accounttbl.password = '' OR user_accounttbl.confirm_password = ''";
-$result = $conn->query($sql);
-
-if ($_SERVER['REQUEST_METHOD'] == "POST") {
-    $item_name = $_POST['search'];
-    if (!$item_name) {
-        $sql = "SELECT * FROM user_accounttbl JOIN personal_infotbl ON user_accounttbl.employee_no = personal_infotbl.employee_no;";
-        $result = $conn->query($sql);
-    } else {
-        $sql = "SELECT * FROM user_accounttbl JOIN personal_infotbl ON user_accounttbl.employee_no = personal_infotbl.employee_no WHERE user_accounttbl.employee_no = $item_name;";
-        $result = $conn->query($sql);
-    }
-}
-?>
+	include 'process/db_connection.php';
+	include 'process/session_check.php';
+	
+	$conn = OpenCon();
+	$sql = "SELECT * FROM user_accounttbl JOIN personal_infotbl ON user_accounttbl.employee_no = personal_infotbl.employee_no WHERE user_accounttbl.username = '' OR user_accounttbl.password = '' OR user_accounttbl.confirm_password = ''";
+	$result = $conn->query($sql);
+	if ($_SERVER['REQUEST_METHOD'] == "POST") {
+	    $item_name = $_POST['search'];
+	    if (!$item_name) {
+	        $sql = "SELECT * FROM user_accounttbl JOIN personal_infotbl ON user_accounttbl.employee_no = personal_infotbl.employee_no;";
+	        $result = $conn->query($sql);
+	    } else {
+	        $sql = "SELECT * FROM user_accounttbl JOIN personal_infotbl ON user_accounttbl.employee_no = personal_infotbl.employee_no WHERE user_accounttbl.employee_no = $item_name;";
+	        $result = $conn->query($sql);
+	    }
+	}
+	?>
 
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
+	<head>
+		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<!-- Latest jQuery -->
 		<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
@@ -34,16 +33,16 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 		<link rel="stylesheet" href="css/sidebar_design.css">
 		<script src="js/script.js"></script>
 		<title>User Account Report</title>
-    </head>
-    <body>
-        <div id="wrapper">
+	</head>
+	<body style="background: url('uploads/BG.png'); background-size:cover;">
+		<div id="wrapper">
 			<nav class="navbar navbar-inverse fixed-top" id="sidebar-wrapper" role="navigation">
 				<ul class="nav sidebar-nav">
 					<div class="sidebar-header">
 						<div class="sidebar-brand">
-						<a href="admin.php" class="<?php echo $user_privilege == 1 ? '' : 'd-none' ?>">Tindahan</a>
-                            <a href="#" class="<?php echo $user_privilege == 2 ? '' : 'd-none' ?>">Tindahan</a>
-                            <a href="#" class="<?php echo $user_privilege == 3 ? '' : 'd-none' ?>">Tindahan</a>
+							<a href="admin.php" class="<?php echo $user_privilege == 1 ? '' : 'd-none' ?>">Tindahan</a>
+							<a href="#" class="<?php echo $user_privilege == 2 ? '' : 'd-none' ?>">Tindahan</a>
+							<a href="#" class="<?php echo $user_privilege == 3 ? '' : 'd-none' ?>">Tindahan</a>
 						</div>
 					</div>
 					<li><a href="admin.php" class="<?php echo $user_privilege == 1 ? '' : 'd-none' ?>">Home</a></li>
@@ -66,10 +65,10 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 				</button>
 			</div>
 		</div>
-        <!-- main content -->
+		<!-- main content -->
 		<div class="flex-grow-1 bg-white">
 			<div class="px-5 bg-white">
-				<h1 class="d-flex justify-content-center m-2" style="font-size:30px;">POS Report</h1>
+				<h1 class="d-flex justify-content-center m-2" style="font-size:30px;">Aling Alaine Account Reports</h1>
 				<form action="" method="post" class="input-group mb-3 mt-3" style="height: 2rem; width:250px">
 					<input type="text" class="form-control" aria-describedby="button-addon2" placeholder="Search item name" name='search'>
 					<button class="btn btn-outline-secondary" type="submit" id="search_button">
@@ -92,7 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 							if ($result) {
 							    while ($item = $result->fetch_assoc()) {
 							        echo "
-                                    <tr class='clickable-row border' style='cursor: pointer' data-href='user_account_info.php?id={$item['employee_no']}'>
+							                             <tr class='clickable-row border' style='cursor: pointer' data-href='user_account_info.php?id={$item['employee_no']}'>
 							            <td>$item[employee_no]</td>
 										<td>$item[fname] $item[mname] $item[lname]</td>
 							            <td>$item[username]</td>
@@ -107,12 +106,12 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 			</div>
 		</div>
 		</div>
-    </body>
-    <script>
-    $(document).ready(function() {
-        $(".clickable-row").click(function() {
-            window.location = $(this).data("href")
-        })
-    })
-    </script>
+	</body>
+	<script>
+		$(document).ready(function() {
+		    $(".clickable-row").click(function() {
+		        window.location = $(this).data("href")
+		    })
+		})
+	</script>
 </html>

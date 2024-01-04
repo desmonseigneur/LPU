@@ -1,22 +1,22 @@
 <?php
-include 'process/db_connection.php';
-include 'process/session_check.php';
+	include 'process/db_connection.php';
+	include 'process/session_check.php';
+	
+	$conn = OpenCon();
+	$sql = "SELECT * FROM incometbl JOIN personal_infotbl ON incometbl.employee_no = personal_infotbl.employee_no JOIN deductiontbl ON incometbl.employee_no = deductiontbl.employee_no;";
+	$result = $conn->query($sql);
+	if ($_SERVER['REQUEST_METHOD'] == "POST") {
+	    $item_name = $_POST['search'];
+	    if (!$item_name) {
+	        $sql = "SELECT * FROM incometbl JOIN personal_infotbl ON incometbl.employee_no = personal_infotbl.employee_no JOIN deductiontbl ON incometbl.employee_no = deductiontbl.employee_no;";
+	        $result = $conn->query($sql);
+	    } else {
+	        $sql = "SELECT * FROM incometbl JOIN personal_infotbl ON incometbl.employee_no = personal_infotbl.employee_no JOIN deductiontbl ON incometbl.employee_no = deductiontbl.employee_no WHERE personal_infotbl.employee_no = $item_name;";
+	        $result = $conn->query($sql);
+	    }
+	}
+	?>
 
-$conn = OpenCon();
-$sql = "SELECT * FROM incometbl JOIN personal_infotbl ON incometbl.employee_no = personal_infotbl.employee_no JOIN deductiontbl ON incometbl.employee_no = deductiontbl.employee_no;";
-$result = $conn->query($sql);
-
-if ($_SERVER['REQUEST_METHOD'] == "POST") {
-    $item_name = $_POST['search'];
-    if (!$item_name) {
-        $sql = "SELECT * FROM incometbl JOIN personal_infotbl ON incometbl.employee_no = personal_infotbl.employee_no JOIN deductiontbl ON incometbl.employee_no = deductiontbl.employee_no;";
-        $result = $conn->query($sql);
-    } else {
-        $sql = "SELECT * FROM incometbl JOIN personal_infotbl ON incometbl.employee_no = personal_infotbl.employee_no JOIN deductiontbl ON incometbl.employee_no = deductiontbl.employee_no WHERE personal_infotbl.employee_no = $item_name;";
-        $result = $conn->query($sql);
-    }
-}
-?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -34,15 +34,15 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 		<script src="js/script.js"></script>
 		<title>Payroll Report</title>
 	</head>
-	<body>
+	<body style="background: url('uploads/BG.png'); background-size:cover;">
 		<div id="wrapper">
 			<nav class="navbar navbar-inverse fixed-top" id="sidebar-wrapper" role="navigation">
 				<ul class="nav sidebar-nav">
 					<div class="sidebar-header">
 						<div class="sidebar-brand">
-						<a href="admin.php" class="<?php echo $user_privilege == 1 ? '' : 'd-none' ?>">Tindahan</a>
-                            <a href="#" class="<?php echo $user_privilege == 2 ? '' : 'd-none' ?>">Tindahan</a>
-                            <a href="#" class="<?php echo $user_privilege == 3 ? '' : 'd-none' ?>">Tindahan</a>
+							<a href="admin.php" class="<?php echo $user_privilege == 1 ? '' : 'd-none' ?>">Tindahan</a>
+							<a href="#" class="<?php echo $user_privilege == 2 ? '' : 'd-none' ?>">Tindahan</a>
+							<a href="#" class="<?php echo $user_privilege == 3 ? '' : 'd-none' ?>">Tindahan</a>
 						</div>
 					</div>
 					<li><a href="admin.php" class="<?php echo $user_privilege == 1 ? '' : 'd-none' ?>">Home</a></li>
@@ -68,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 		<!-- main content -->
 		<div class=" flex-grow-1 bg-white">
 			<div class="px-5 bg-white">
-				<h1 class="d-flex justify-content-center m-2" style="font-size:30px;"><b>Payroll Report</b></h1>
+				<h1 class="d-flex justify-content-center m-2" style="font-size:30px;"><b>Aling Alaine Payroll Report</b></h1>
 				<form action="" method="post" class="input-group mb-3 mt-3" style="height: 2rem; width:250px">
 					<input type="text" class="form-control" aria-describedby="button-addon2" placeholder="Search item name" name='search'>
 					<button class="btn btn-outline-secondary" type="submit" id="search_button">
@@ -116,10 +116,10 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 		</div>
 	</body>
 	<script>
-    $(document).ready(function() {
-        $(".clickable-row").click(function() {
-            window.location = $(this).data("href")
-        })
-    })
-</script>
+		$(document).ready(function() {
+		    $(".clickable-row").click(function() {
+		        window.location = $(this).data("href")
+		    })
+		})
+	</script>
 </html>

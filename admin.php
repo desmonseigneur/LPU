@@ -1,18 +1,18 @@
 <?php
-include 'process/db_connection.php';
-include 'process/session_check.php';
+	include 'process/db_connection.php';
+	include 'process/session_check.php';
+	
+	$conn = OpenCon();
+	$sql = "SELECT * FROM `salestbl` ORDER BY id DESC LIMIT 5;";
+	$result = $conn->query($sql);
 
-$conn = OpenCon();
-$sql = "SELECT * FROM `salestbl` ORDER BY id DESC LIMIT 5;";
-$result = $conn->query($sql);
-
-$sql2 = "SELECT id FROM `personal_infotbl`;";
-$result2 = mysqli_fetch_all($conn->query($sql2));
-
-$sql3 = "SELECT COUNT(privilege) AS privilege_count FROM user_accounttbl WHERE privilege != 0 GROUP BY privilege WITH ROLLUP;";
-$result3 = mysqli_fetch_all($conn->query($sql3));
-?>
-
+	$sql2 = "SELECT id FROM `personal_infotbl`;";
+	$result2 = mysqli_fetch_all($conn->query($sql2));
+	
+	$sql3 = "SELECT COUNT(privilege) AS privilege_count FROM user_accounttbl WHERE privilege != 0 GROUP BY privilege WITH ROLLUP;";
+	$result3 = mysqli_fetch_all($conn->query($sql3));
+	?>
+	
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -30,15 +30,15 @@ $result3 = mysqli_fetch_all($conn->query($sql3));
 		<script src="js/script.js"></script>
 		<title>Home</title>
 	</head>
-	<body>
+	<body style="background: url('uploads/BG.png'); background-size:cover;">
 		<div id="wrapper">
 			<nav class="navbar navbar-inverse fixed-top" id="sidebar-wrapper" role="navigation">
 				<ul class="nav sidebar-nav">
 					<div class="sidebar-header">
 						<div class="sidebar-brand">
-						<a href="admin.php" class="<?php echo $user_privilege == 1 ? '' : 'd-none' ?>">Tindahan</a>
-                            <a href="#" class="<?php echo $user_privilege == 2 ? '' : 'd-none' ?>">Tindahan</a>
-                            <a href="#" class="<?php echo $user_privilege == 3 ? '' : 'd-none' ?>">Tindahan</a>
+							<a href="admin.php" class="<?php echo $user_privilege == 1 ? '' : 'd-none' ?>">Tindahan</a>
+							<a href="#" class="<?php echo $user_privilege == 2 ? '' : 'd-none' ?>">Tindahan</a>
+							<a href="#" class="<?php echo $user_privilege == 3 ? '' : 'd-none' ?>">Tindahan</a>
 						</div>
 					</div>
 					<li><a href="admin.php" class="<?php echo $user_privilege == 1 ? '' : 'd-none' ?>">Home</a></li>
